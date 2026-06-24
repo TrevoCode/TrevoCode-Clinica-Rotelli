@@ -198,10 +198,13 @@ export default function Proposta() {
             <div className="font-bold mb-2">Cadência</div>
             <div className="text-muted text-sm">4–5 posts/semana + stories diários. <b className="text-ink/80">Reels</b> puxam alcance; carrossel gera autoridade.</div>
           </Card>
-          <Card className="sm:col-span-2 border-brand/40 bg-brand-soft">
-            <div className="font-bold text-brand-dark mb-1">🎬 12 posts já prontos pra vocês verem</div>
-            <div className="text-ink/75 text-sm">Implante · harmonização · “conheça a clínica” · depoimento · clínico geral — gancho + ideia visual + legenda + CTA. Tudo dentro das regras do CFO (CRO do Dr. Claudio na assinatura, sem promessa de resultado).</div>
-          </Card>
+          <Link href="/instagram" className="sm:col-span-2 rounded-2xl border border-brand/40 bg-brand-soft p-5 shadow-sm hover:shadow-md hover:border-brand transition flex items-center gap-3">
+            <div className="flex-1">
+              <div className="font-bold text-brand-dark mb-1">🎬 12 posts já prontos — ver o feed →</div>
+              <div className="text-ink/75 text-sm">Implante · harmonização · “conheça a clínica” · depoimento · clínico geral — gancho + ideia visual + legenda + CTA. Tudo dentro das regras do CFO (CRO do Dr. Claudio na assinatura, sem promessa de resultado).</div>
+            </div>
+            <span className="text-brand text-2xl">›</span>
+          </Link>
         </div>
       </Slide>
 

@@ -41,7 +41,7 @@ export const BASE: ItemBase[] = [
     categoria: "localizacao",
     titulo: "Endereço",
     conteudo:
-      "Estamos na Av. Exemplo, 1234 — Centro, São Bernardo do Campo/SP. Ponto de referência: ao lado do Banco do Exemplo. (endereço de demonstração)",
+      "A Clínica Rotelli fica em São Bernardo do Campo/SP. Posso te passar o endereço completo e o ponto de referência junto da confirmação do seu horário. (endereço exato entra na sessão de base com a clínica)",
     sinonimos: ["onde fica", "endereço", "localização", "como chegar"],
   },
   {

@@ -24,3 +24,6 @@ Thumbs.db
 # editores
 .vscode/
 .idea/
+
+# projeto usa bun — não versionar lockfile do npm
+package-lock.json
