@@ -27,6 +27,19 @@ export default function Home() {
           </div>
         </Link>
 
+        {/* Instagram — prioridade nº1 do cliente */}
+        <Link
+          href="/instagram"
+          className="bg-card rounded-3xl border border-brand/30 p-5 mt-4 flex items-center gap-3 hover:border-brand hover:shadow-md transition"
+        >
+          <div className="text-3xl">📸</div>
+          <div className="flex-1">
+            <div className="font-bold">O Instagram pronto pra postar</div>
+            <div className="text-muted text-sm">Prévia do feed @clinicarotelli com os 12 posts.</div>
+          </div>
+          <span className="text-brand text-2xl">›</span>
+        </Link>
+
         {/* atalhos */}
         <div className="grid sm:grid-cols-3 gap-3 mt-4">
           <Link
