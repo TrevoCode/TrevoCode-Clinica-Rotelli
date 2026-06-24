@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   MessageCircle, CalendarCheck, MapPin, Clock, Phone,
   Sparkles, Stethoscope, ShieldCheck, HeartHandshake, Star, Award, GraduationCap,
-  Check, ChevronRight, CreditCard, Smile, Building2, Camera,
+  ChevronRight, CreditCard, Smile, Building2, Camera,
 } from "lucide-react";
 import { Logo, PorTrevocode } from "../_components/brand";
 
@@ -54,9 +54,12 @@ const EQUIPE = [
 ];
 
 const SERVICOS = [
-  "Avaliação (primeira consulta)", "Limpeza / profilaxia", "Restauração", "Tratamento de canal",
-  "Extração e siso", "Clareamento dental", "Implante dentário", "Harmonização orofacial",
-  "Ortodontia (aparelho)", "Odontopediatria",
+  { img: "/rotelli/servicos/servico-limpeza.png", t: "Limpeza / profilaxia", d: "Remove placa e tártaro e previne cáries e problemas na gengiva." },
+  { img: "/rotelli/servicos/servico-restauracao.png", t: "Restauração", d: "Recompõe o dente afetado por cárie ou fratura." },
+  { img: "/rotelli/servicos/servico-canal.png", t: "Tratamento de canal", d: "Endodontia para salvar o dente e acabar com a dor." },
+  { img: "/rotelli/servicos/servico-extracao.png", t: "Extração e siso", d: "Remoção segura, incluindo sisos, com todo o conforto." },
+  { img: "/rotelli/servicos/servico-ortodontia.png", t: "Ortodontia", d: "Alinhe os dentes com aparelho ou alinhadores transparentes." },
+  { img: "/rotelli/servicos/servico-odontopediatria.png", t: "Odontopediatria", d: "Cuidado gentil e acolhedor para as crianças." },
 ];
 
 function Section({ id, children, className = "" }: { id?: string; children: React.ReactNode; className?: string }) {
@@ -247,16 +250,21 @@ export default function Site() {
       <Section id="servicos">
         <div className="text-center mb-12">
           <Eyebrow>Tratamentos</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Serviços</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Mais serviços</h2>
+          <p className="text-muted mt-3 max-w-2xl mx-auto">Além das especialidades, o cuidado completo do dia a dia do seu sorriso.</p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SERVICOS.map((s) => (
-            <div key={s} className="flex items-center gap-2.5 rounded-xl border border-line bg-card px-4 py-3 text-sm">
-              <Check size={16} className="text-emerald-600 shrink-0" /> {s}
+            <div key={s.t} className="rounded-3xl border border-line bg-card shadow-sm hover:shadow-md hover:border-brand/40 transition overflow-hidden">
+              <img src={s.img} alt={s.t} className="w-full aspect-[4/3] object-cover" />
+              <div className="p-5">
+                <h3 className="font-bold">{s.t}</h3>
+                <p className="text-muted text-sm mt-1">{s.d}</p>
+              </div>
             </div>
           ))}
         </div>
-        <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
+        <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm text-muted">
           <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5"><CreditCard size={14} className="text-brand" /> Dinheiro, Pix e cartão · até 12x</span>
           <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5"><ShieldCheck size={14} className="text-brand" /> Convênios Amil, Bradesco e SulAmérica</span>
         </div>
