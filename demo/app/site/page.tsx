@@ -19,9 +19,9 @@ const NAV = [
 ];
 
 const ESPECIALIDADES = [
-  { Icon: Award, t: "Implante Dentário", d: "Recupere dentes perdidos com a segurança de um especialista. Avaliação e planejamento individual.", quem: "Dr. Claudio Rotelli" },
-  { Icon: Sparkles, t: "Harmonização Orofacial", d: "Realce natural do seu rosto e do seu sorriso, com equilíbrio entre estética e saúde.", quem: "Dr. Claudio Rotelli" },
-  { Icon: Smile, t: "Odontologia Geral", d: "Limpeza, restauração, canal, clareamento e avaliação — o cuidado completo do dia a dia.", quem: "Dr. Lucas" },
+  { Icon: Award, img: "/rotelli/servicos/servico-implante.png", t: "Implante Dentário", d: "Recupere dentes perdidos com a segurança de um especialista. Avaliação e planejamento individual.", quem: "Dr. Claudio Rotelli" },
+  { Icon: Sparkles, img: "/rotelli/servicos/servico-harmonizacao.png", t: "Harmonização Orofacial", d: "Realce natural do seu rosto e do seu sorriso, com equilíbrio entre estética e saúde.", quem: "Dr. Claudio Rotelli" },
+  { Icon: Smile, img: "/rotelli/servicos/servico-clareamento.png", t: "Odontologia Geral", d: "Limpeza, restauração, canal, clareamento e avaliação — o cuidado completo do dia a dia.", quem: "Dr. Lucas" },
 ];
 
 const DIFERENCIAIS = [
@@ -136,11 +136,16 @@ export default function Site() {
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {ESPECIALIDADES.map((e) => (
-            <div key={e.t} className="rounded-3xl border border-line bg-card p-6 shadow-sm hover:shadow-md hover:border-brand/40 transition">
-              <div className="w-12 h-12 rounded-2xl brand-gradient text-white flex items-center justify-center mb-4"><e.Icon size={24} /></div>
-              <h3 className="font-extrabold text-lg">{e.t}</h3>
-              <p className="text-muted text-sm mt-2">{e.d}</p>
-              <div className="text-brand text-xs font-semibold mt-4 flex items-center gap-1"><Stethoscope size={13} /> {e.quem}</div>
+            <div key={e.t} className="rounded-3xl border border-line bg-card shadow-sm hover:shadow-md hover:border-brand/40 transition overflow-hidden">
+              <div className="relative">
+                <img src={e.img} alt={e.t} className="w-full aspect-[4/3] object-cover" />
+                <div className="absolute -bottom-5 left-5 w-11 h-11 rounded-2xl brand-gradient text-white flex items-center justify-center shadow-lg"><e.Icon size={22} /></div>
+              </div>
+              <div className="p-6 pt-7">
+                <h3 className="font-extrabold text-lg">{e.t}</h3>
+                <p className="text-muted text-sm mt-2">{e.d}</p>
+                <div className="text-brand text-xs font-semibold mt-4 flex items-center gap-1"><Stethoscope size={13} /> {e.quem}</div>
+              </div>
             </div>
           ))}
         </div>
