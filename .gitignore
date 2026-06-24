@@ -1,0 +1,26 @@
+# dependências e build
+node_modules/
+.next/
+out/
+dist/
+
+# ambiente / segredos (NUNCA versionar)
+.env
+.env.local
+.env*.local
+*.key
+*.pem
+*-sa.json
+service-account*.json
+
+# Vercel
+.vercel
+
+# logs e sistema
+*.log
+.DS_Store
+Thumbs.db
+
+# editores
+.vscode/
+.idea/
