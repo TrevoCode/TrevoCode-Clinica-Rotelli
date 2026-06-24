@@ -6,16 +6,15 @@ import {
 } from "lucide-react";
 import { Logo, PorTrevocode } from "../_components/brand";
 
-// Site institucional (público) da Clínica Rotelli — one-page premium.
-// Marca creme/laranja, ícones Lucide, sem emoji. Dados marcados como demonstração
-// onde ainda dependem da sessão de base com a clínica.
+// Site institucional (público) da Clínica Rotelli — one-page premium com fotos reais
+// do @clinicarotelli (em /public/rotelli). Marca creme/laranja, ícones Lucide, sem emoji.
 
 const WHATS = "/atendimento"; // no demo aponta pro simulador do bot; em produção: wa.me/<numero>
 
 const NAV = [
   { href: "#especialidades", label: "Especialidades" },
+  { href: "#resultados", label: "Resultados" },
   { href: "#equipe", label: "Equipe" },
-  { href: "#servicos", label: "Serviços" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -32,9 +31,21 @@ const DIFERENCIAIS = [
   { Icon: MessageCircle, t: "Resposta rápida", d: "Tire dúvidas e agende pelo WhatsApp, sem ficar no vácuo." },
 ];
 
+const RESULTADOS = [
+  { img: "/rotelli/antes-depois-implante.jpg", t: "Reabilitação do sorriso" },
+  { img: "/rotelli/antes-depois-clareamento.jpg", t: "Clareamento e estética" },
+  { img: "/rotelli/antes-depois-gengival.jpg", t: "Harmonização do sorriso" },
+];
+
+const CLINICA = [
+  { img: "/rotelli/recepcao-2.jpg", t: "Recepção" },
+  { img: "/rotelli/consultorio.jpg", t: "Consultório" },
+  { img: "/rotelli/congresso-eao.jpg", t: "Atualização constante" },
+];
+
 const EQUIPE = [
   { nome: "Dr. Claudio Rotelli", papel: "Implante e Harmonização Orofacial", reg: "CRO-SP ‹nº›", Icon: Award,
-    bio: "Especialista responsável pelos casos de implante e harmonização orofacial. Referência em São Bernardo do Campo." },
+    bio: "Especialista responsável pelos casos de implante e harmonização orofacial. Atualização constante em congressos internacionais (EAO)." },
   { nome: "Dr. Lucas", papel: "Clínico Geral", reg: "CRO-SP ‹nº›", Icon: GraduationCap,
     bio: "Cuida da porta de entrada: avaliação, limpeza, restaurações, canal e clareamento, com atenção a cada paciente." },
 ];
@@ -43,12 +54,6 @@ const SERVICOS = [
   "Avaliação (primeira consulta)", "Limpeza / profilaxia", "Restauração", "Tratamento de canal",
   "Extração e siso", "Clareamento dental", "Implante dentário", "Harmonização orofacial",
   "Ortodontia (aparelho)", "Odontopediatria",
-];
-
-const DEPOIMENTOS = [
-  { nome: "Paciente Rotelli", txt: "Atendimento atencioso do começo ao fim. Expliquei meu medo e fui acolhida em cada etapa." },
-  { nome: "Paciente Rotelli", txt: "Fiz meu implante com o Dr. Claudio e o resultado ficou natural. Recomendo demais." },
-  { nome: "Paciente Rotelli", txt: "Marquei pelo WhatsApp e fui respondida na hora. Clínica organizada e equipe gente boa." },
 ];
 
 function Section({ id, children, className = "" }: { id?: string; children: React.ReactNode; className?: string }) {
@@ -89,31 +94,38 @@ export default function Site() {
 
       {/* HERO */}
       <section id="topo" className="relative overflow-hidden">
-        <div className="absolute inset-0 brand-gradient opacity-[0.07]" />
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center flex flex-col items-center">
-          <Logo size={92} className="mb-6" />
-          <span className="inline-flex items-center gap-1.5 text-brand-dark bg-brand-soft border border-brand/20 rounded-full px-3 py-1 text-xs font-semibold mb-5">
-            <MapPin size={13} /> São Bernardo do Campo · SP
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] max-w-3xl">
-            Seu sorriso em boas mãos. <span className="brand-text-gradient">Transformando sonhos em sorrisos.</span>
-          </h1>
-          <p className="text-muted text-lg mt-6 max-w-2xl">
-            Implante, harmonização orofacial e odontologia geral em São Bernardo do Campo.
-            Atendimento humanizado, sem pressa e sem medo.
-          </p>
-          <div className="flex flex-wrap gap-3 mt-9 justify-center">
-            <Link href={WHATS} className="flex items-center gap-2 rounded-full brand-gradient text-white font-bold px-6 py-3 shadow-lg shadow-brand/20 hover:brightness-105 transition">
-              <MessageCircle size={18} /> Agendar pelo WhatsApp
-            </Link>
-            <a href="#especialidades" className="flex items-center gap-2 rounded-full border border-brand/40 text-brand px-6 py-3 font-semibold hover:bg-brand-soft transition">
-              Ver especialidades <ChevronRight size={16} />
-            </a>
+        <div className="absolute inset-0 brand-gradient opacity-[0.06]" />
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 pt-14 pb-12 sm:pt-20 grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <span className="inline-flex items-center gap-1.5 text-brand-dark bg-brand-soft border border-brand/20 rounded-full px-3 py-1 text-xs font-semibold mb-5">
+              <MapPin size={13} /> São Bernardo do Campo · SP
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.07]">
+              Seu sorriso em boas mãos. <span className="brand-text-gradient">Transformando sonhos em sorrisos.</span>
+            </h1>
+            <p className="text-muted text-lg mt-5 max-w-xl">
+              Implante, harmonização orofacial e odontologia geral. Atendimento humanizado, sem pressa e sem medo.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-8">
+              <Link href={WHATS} className="flex items-center gap-2 rounded-full brand-gradient text-white font-bold px-6 py-3 shadow-lg shadow-brand/20 hover:brightness-105 transition">
+                <MessageCircle size={18} /> Agendar pelo WhatsApp
+              </Link>
+              <a href="#resultados" className="flex items-center gap-2 rounded-full border border-brand/40 text-brand px-6 py-3 font-semibold hover:bg-brand-soft transition">
+                Ver resultados <ChevronRight size={16} />
+              </a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 text-sm text-muted">
+              <span className="flex items-center gap-1.5"><CalendarCheck size={15} className="text-brand" /> Avaliação sem compromisso</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck size={15} className="text-brand" /> Especialistas registrados</span>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-10 text-sm text-muted">
-            <span className="flex items-center gap-1.5"><CalendarCheck size={15} className="text-brand" /> Avaliação sem compromisso</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck size={15} className="text-brand" /> Especialistas registrados</span>
-            <span className="flex items-center gap-1.5"><MessageCircle size={15} className="text-brand" /> Resposta rápida</span>
+          {/* foto real da recepção */}
+          <div className="relative">
+            <img src="/rotelli/recepcao-2.jpg" alt="Recepção da Clínica Rotelli" className="rounded-3xl shadow-xl shadow-brand/10 w-full object-cover aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]" />
+            <div className="absolute -bottom-4 -left-2 sm:left-4 bg-card rounded-2xl shadow-lg border border-line px-4 py-3 flex items-center gap-2">
+              <Star size={16} className="text-brand" fill="currentColor" />
+              <span className="text-sm font-semibold">Estrutura premium em SBC</span>
+            </div>
           </div>
         </div>
       </section>
@@ -136,8 +148,25 @@ export default function Site() {
         </div>
       </Section>
 
+      {/* RESULTADOS (antes e depois) */}
+      <Section id="resultados">
+        <div className="text-center mb-12">
+          <Eyebrow>Antes e depois</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Resultados reais</h2>
+          <p className="text-muted mt-3 max-w-2xl mx-auto">Casos reais de pacientes da Clínica Rotelli. Cada sorriso é um plano individual.</p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-5">
+          {RESULTADOS.map((r) => (
+            <figure key={r.img} className="rounded-3xl overflow-hidden border border-line bg-card shadow-sm">
+              <img src={r.img} alt={r.t} className="w-full aspect-square object-cover" />
+              <figcaption className="px-4 py-3 text-sm font-semibold flex items-center gap-2"><Sparkles size={15} className="text-brand" /> {r.t}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+
       {/* DIFERENCIAIS */}
-      <Section>
+      <Section className="bg-cream-2">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
             <Eyebrow>Por que a Rotelli</Eyebrow>
@@ -160,22 +189,41 @@ export default function Site() {
       </Section>
 
       {/* EQUIPE */}
-      <Section id="equipe" className="bg-cream-2">
+      <Section id="equipe">
         <div className="text-center mb-12">
           <Eyebrow>Quem cuida de você</Eyebrow>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Nossa equipe</h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
-          {EQUIPE.map((m) => (
-            <div key={m.nome} className="rounded-3xl border border-line bg-card p-6 shadow-sm flex gap-5">
-              <div className="w-16 h-16 rounded-2xl brand-gradient text-white flex items-center justify-center shrink-0"><m.Icon size={28} /></div>
-              <div>
-                <h3 className="font-extrabold text-lg">{m.nome}</h3>
-                <div className="text-brand text-sm font-semibold">{m.papel}</div>
-                <div className="text-muted text-xs mb-2">{m.reg}</div>
-                <p className="text-muted text-sm">{m.bio}</p>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <img src="/rotelli/equipe.jpg" alt="Equipe da Clínica Rotelli" className="rounded-3xl shadow-xl shadow-brand/10 w-full object-cover aspect-[4/3]" />
+          <div className="space-y-4">
+            {EQUIPE.map((m) => (
+              <div key={m.nome} className="rounded-2xl border border-line bg-card p-5 shadow-sm flex gap-4">
+                <div className="w-12 h-12 rounded-xl brand-gradient text-white flex items-center justify-center shrink-0"><m.Icon size={22} /></div>
+                <div>
+                  <h3 className="font-extrabold">{m.nome}</h3>
+                  <div className="text-brand text-sm font-semibold">{m.papel}</div>
+                  <div className="text-muted text-xs mb-1">{m.reg}</div>
+                  <p className="text-muted text-sm">{m.bio}</p>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* A CLÍNICA (galeria) */}
+      <Section className="bg-cream-2">
+        <div className="text-center mb-12">
+          <Eyebrow>Conheça por dentro</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">A clínica</h2>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-5">
+          {CLINICA.map((c) => (
+            <figure key={c.img} className="relative rounded-3xl overflow-hidden border border-line shadow-sm group">
+              <img src={c.img} alt={c.t} className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition duration-500" />
+              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent text-white text-sm font-semibold px-4 py-3">{c.t}</figcaption>
+            </figure>
           ))}
         </div>
       </Section>
@@ -199,24 +247,20 @@ export default function Site() {
         </div>
       </Section>
 
-      {/* DEPOIMENTOS */}
+      {/* DEPOIMENTOS (prints reais de WhatsApp) */}
       <Section className="bg-cream-2">
         <div className="text-center mb-12">
           <Eyebrow>Quem já sorriu com a gente</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Depoimentos</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Depoimentos de pacientes</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {DEPOIMENTOS.map((d, i) => (
-            <div key={i} className="rounded-3xl border border-line bg-card p-6 shadow-sm">
-              <div className="flex gap-0.5 text-brand mb-3">
-                {Array.from({ length: 5 }).map((_, k) => <Star key={k} size={15} fill="currentColor" />)}
-              </div>
-              <p className="text-ink/80 text-sm">“{d.txt}”</p>
-              <div className="text-muted text-xs mt-3 font-medium">{d.nome}</div>
+        <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+          {["/rotelli/depoimento-1.jpg", "/rotelli/depoimento-2.jpg"].map((img) => (
+            <div key={img} className="rounded-3xl overflow-hidden border border-line bg-card shadow-sm">
+              <img src={img} alt="Depoimento de paciente" className="w-full object-cover" />
             </div>
           ))}
         </div>
-        <p className="text-muted/60 text-xs text-center mt-6">Depoimentos ilustrativos de demonstração — os reais entram com consentimento dos pacientes.</p>
+        <p className="text-muted/60 text-xs text-center mt-6">Mensagens reais de pacientes, compartilhadas com autorização.</p>
       </Section>
 
       {/* CONTATO / LOCALIZAÇÃO */}
