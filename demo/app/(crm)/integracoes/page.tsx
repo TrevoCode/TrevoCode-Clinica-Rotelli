@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CalendarCheck, MessageCircle, Info, CheckCircle2, XCircle } from "lucide-react";
 
 type DoutorG = { id: string; nome: string; especialidade: string; configurado: boolean };
 type Status = {
@@ -60,7 +61,7 @@ export default function Integracoes() {
       {/* GOOGLE AGENDA */}
       <section className="rounded-2xl border border-line bg-card shadow-sm p-5 mb-5">
         <div className="flex items-start gap-3">
-          <span className="text-2xl">🗓️</span>
+          <CalendarCheck size={24} className="text-brand shrink-0" />
           <div className="flex-1">
             <h2 className="font-bold">Google Agenda</h2>
             <p className="text-muted text-sm">
@@ -81,9 +82,10 @@ export default function Integracoes() {
             <code className="font-mono text-xs break-all text-brand-dark">{saEmail}</code>
           </div>
         ) : (
-          <div className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 text-[12px] text-amber-900">
-            ⓘ Integração com o Google ainda não ativada. A Trevocode configura a conta de serviço e aqui
-            aparece o e-mail pra compartilhar as agendas dos doutores.
+          <div className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 text-[12px] text-amber-900 flex items-start gap-2">
+            <Info size={14} className="mt-0.5 shrink-0" />
+            <span>Integração com o Google ainda não ativada. A Trevocode configura a conta de serviço e aqui
+            aparece o e-mail pra compartilhar as agendas dos doutores.</span>
           </div>
         )}
 
@@ -107,9 +109,9 @@ export default function Integracoes() {
                   </button>
                 </div>
                 {t.ok === true && (
-                  <div className="text-emerald-700 text-xs mt-2">✓ Conectado — agenda acessível pela plataforma.</div>
+                  <div className="flex items-center gap-1 text-emerald-700 text-xs mt-2"><CheckCircle2 size={13} /> Conectado — agenda acessível pela plataforma.</div>
                 )}
-                {t.ok === false && <div className="text-red-600 text-xs mt-2">✗ {t.erro}</div>}
+                {t.ok === false && <div className="flex items-center gap-1 text-red-600 text-xs mt-2"><XCircle size={13} /> {t.erro}</div>}
               </div>
             );
           })}
@@ -120,7 +122,7 @@ export default function Integracoes() {
       {/* WHATSAPP */}
       <section className="rounded-2xl border border-line bg-card shadow-sm p-5">
         <div className="flex items-start gap-3">
-          <span className="text-2xl">💬</span>
+          <MessageCircle size={24} className="text-brand shrink-0" />
           <div className="flex-1">
             <h2 className="font-bold">WhatsApp da clínica</h2>
             <p className="text-muted text-sm">
@@ -144,9 +146,10 @@ export default function Integracoes() {
           </button>
         </div>
         {waMsg && (
-          <p className="text-[12px] text-amber-900 mt-3 rounded-lg bg-amber-50 border border-amber-200 p-2">
-            ⓘ A conexão real é feita na <b>Fase 0</b> (pós-fechamento): provisionamos o número dedicado e o
-            app oficial na Meta. O código e esta tela já estão prontos pra plugar.
+          <p className="text-[12px] text-amber-900 mt-3 rounded-lg bg-amber-50 border border-amber-200 p-2 flex items-start gap-2">
+            <Info size={14} className="mt-0.5 shrink-0" />
+            <span>A conexão real é feita na <b>Fase 0</b> (pós-fechamento): provisionamos o número dedicado e o
+            app oficial na Meta. O código e esta tela já estão prontos pra plugar.</span>
           </p>
         )}
       </section>

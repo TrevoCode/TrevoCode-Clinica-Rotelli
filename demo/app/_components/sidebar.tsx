@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LayoutDashboard, MessageCircle, CalendarDays, Plug, ArrowLeft, Clover } from "lucide-react";
 import { Logo } from "./brand";
 
 const NAV = [
-  { href: "/painel", label: "Painel", icon: "📊" },
-  { href: "/atendimento", label: "Atendimento", icon: "💬" },
-  { href: "/agenda", label: "Agenda", icon: "🗓️" },
-  { href: "/integracoes", label: "Integrações", icon: "🔌" },
+  { href: "/painel", label: "Painel", Icon: LayoutDashboard },
+  { href: "/atendimento", label: "Atendimento", Icon: MessageCircle },
+  { href: "/agenda", label: "Agenda", Icon: CalendarDays },
+  { href: "/integracoes", label: "Integrações", Icon: Plug },
 ];
 
 function Itens({ pathname, onNav }: { pathname: string; onNav?: () => void }) {
@@ -27,7 +28,7 @@ function Itens({ pathname, onNav }: { pathname: string; onNav?: () => void }) {
                 : "text-ink/70 hover:bg-brand-soft hover:text-brand-dark"
             }`}
           >
-            <span className="text-base">{n.icon}</span>
+            <n.Icon size={18} />
             {n.label}
           </Link>
         );
@@ -53,10 +54,10 @@ export function Sidebar() {
           <Itens pathname={pathname} />
         </nav>
         <div className="mt-auto px-2 pt-4 border-t border-line">
-          <Link href="/proposta" className="text-muted text-xs hover:text-brand">
-            ← ver a apresentação
+          <Link href="/proposta" className="flex items-center gap-1.5 text-muted text-xs hover:text-brand">
+            <ArrowLeft size={13} /> ver a apresentação
           </Link>
-          <div className="text-muted/60 text-[10px] mt-2">tecnologia Trevocode 🍀</div>
+          <div className="flex items-center gap-1 text-muted/60 text-[10px] mt-2">tecnologia Trevocode <Clover size={11} className="text-brand/70" /></div>
         </div>
       </aside>
 

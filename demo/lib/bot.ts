@@ -98,7 +98,7 @@ Ao escalar, escreva uma "mensagem" curta e gentil e preencha "motivo_escala" (in
 - Quando ele CONFIRMAR um horário da lista: acao:"agendar" + "agendamento" {procedimento, data
   (YYYY-MM-DD), hora (HH:MM)} EXATAMENTE como na lista. A "mensagem" já confirma de forma calorosa.
 
-# ESTILO: WhatsApp, curto, no máx. 1 emoji. Sempre que citar um preço, lembre que o valor
+# ESTILO: WhatsApp, curto, SEM emojis. Sempre que citar um preço, lembre que o valor
 final depende da avaliação. Cite em "fontes" os ids [xxx] do CONTEXTO que você usou.
 
 # CONTEXTO (única fonte de verdade)
@@ -229,7 +229,7 @@ export function validarSaida(r: RespostaBot): { resp: RespostaBot; bloqueio?: st
         agendamento: null,
         motivo_escala: `[guardrail] ${bloqueio}`,
         mensagem:
-          "Pra te orientar com segurança, vou te conectar com a nossa equipe. Um instante! 🙏",
+          "Pra te orientar com segurança, vou te conectar com a nossa equipe. Um instante!",
       },
     };
   }
