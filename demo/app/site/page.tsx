@@ -37,11 +37,14 @@ const RESULTADOS = [
   { img: "/rotelli/antes-depois-gengival.jpg", t: "Harmonização do sorriso" },
 ];
 
-const CLINICA = [
-  { img: "/rotelli/recepcao-2.jpg", t: "Recepção" },
-  { img: "/rotelli/consultorio.jpg", t: "Consultório" },
-  { img: "/rotelli/congresso-eao.jpg", t: "Atualização constante" },
-];
+const AVALIACOES = {
+  nota: "5,0",
+  reviews: [
+    { nome: "Paciente Rotelli", txt: "Profissionais excelentes e atenciosos. O resultado do meu implante ficou perfeito. Super recomendo!" },
+    { nome: "Paciente Rotelli", txt: "Atendimento humanizado de verdade. Me explicaram tudo com calma e o ambiente é lindo e acolhedor." },
+    { nome: "Paciente Rotelli", txt: "Fiz harmonização com o Dr. Claudio e amei. Ficou natural, sem exagero. Equipe nota mil." },
+  ],
+};
 
 const EQUIPE = [
   { nome: "Dr. Claudio Rotelli", papel: "Implante e Harmonização Orofacial", reg: "CRO-SP ‹nº›", Icon: Award,
@@ -92,39 +95,34 @@ export default function Site() {
         </div>
       </header>
 
-      {/* HERO */}
+      {/* HERO — recepção real como background full-bleed */}
       <section id="topo" className="relative overflow-hidden">
-        <div className="absolute inset-0 brand-gradient opacity-[0.06]" />
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 pt-14 pb-12 sm:pt-20 grid lg:grid-cols-2 gap-10 items-center">
-          <div>
+        <img src="/rotelli/recepcao-2.jpg" alt="Recepção da Clínica Rotelli" className="absolute inset-0 w-full h-full object-cover" />
+        {/* véu creme: sólido no mobile, gradiente da esquerda no desktop (texto legível, imagem aparece à direita) */}
+        <div className="absolute inset-0 bg-cream/90 sm:bg-gradient-to-r sm:from-cream sm:from-30% sm:via-cream/85 sm:to-cream/20" />
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-28 lg:py-32">
+          <div className="max-w-xl">
             <span className="inline-flex items-center gap-1.5 text-brand-dark bg-brand-soft border border-brand/20 rounded-full px-3 py-1 text-xs font-semibold mb-5">
               <MapPin size={13} /> São Bernardo do Campo · SP
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.07]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.06]">
               Seu sorriso em boas mãos. <span className="brand-text-gradient">Transformando sonhos em sorrisos.</span>
             </h1>
-            <p className="text-muted text-lg mt-5 max-w-xl">
+            <p className="text-ink/70 text-lg mt-5 max-w-lg">
               Implante, harmonização orofacial e odontologia geral. Atendimento humanizado, sem pressa e sem medo.
             </p>
             <div className="flex flex-wrap gap-3 mt-8">
               <Link href={WHATS} className="flex items-center gap-2 rounded-full brand-gradient text-white font-bold px-6 py-3 shadow-lg shadow-brand/20 hover:brightness-105 transition">
                 <MessageCircle size={18} /> Agendar pelo WhatsApp
               </Link>
-              <a href="#resultados" className="flex items-center gap-2 rounded-full border border-brand/40 text-brand px-6 py-3 font-semibold hover:bg-brand-soft transition">
+              <a href="#resultados" className="flex items-center gap-2 rounded-full border border-brand/40 text-brand bg-cream/60 px-6 py-3 font-semibold hover:bg-brand-soft transition">
                 Ver resultados <ChevronRight size={16} />
               </a>
             </div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 text-sm text-muted">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 text-sm text-ink/70">
+              <span className="flex items-center gap-1.5"><Star size={15} className="text-brand" fill="currentColor" /> Estrutura premium em SBC</span>
               <span className="flex items-center gap-1.5"><CalendarCheck size={15} className="text-brand" /> Avaliação sem compromisso</span>
               <span className="flex items-center gap-1.5"><ShieldCheck size={15} className="text-brand" /> Especialistas registrados</span>
-            </div>
-          </div>
-          {/* foto real da recepção */}
-          <div className="relative">
-            <img src="/rotelli/recepcao-2.jpg" alt="Recepção da Clínica Rotelli" className="rounded-3xl shadow-xl shadow-brand/10 w-full object-cover aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]" />
-            <div className="absolute -bottom-4 -left-2 sm:left-4 bg-card rounded-2xl shadow-lg border border-line px-4 py-3 flex items-center gap-2">
-              <Star size={16} className="text-brand" fill="currentColor" />
-              <span className="text-sm font-semibold">Estrutura premium em SBC</span>
             </div>
           </div>
         </div>
@@ -157,8 +155,8 @@ export default function Site() {
         </div>
         <div className="grid sm:grid-cols-3 gap-5">
           {RESULTADOS.map((r) => (
-            <figure key={r.img} className="rounded-3xl overflow-hidden border border-line bg-card shadow-sm">
-              <img src={r.img} alt={r.t} className="w-full aspect-square object-cover" />
+            <figure key={r.img} className="rounded-3xl overflow-hidden border border-line bg-card shadow-sm self-start">
+              <img src={r.img} alt={r.t} className="w-full h-auto" />
               <figcaption className="px-4 py-3 text-sm font-semibold flex items-center gap-2"><Sparkles size={15} className="text-brand" /> {r.t}</figcaption>
             </figure>
           ))}
@@ -195,7 +193,7 @@ export default function Site() {
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Nossa equipe</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-8 items-center">
-          <img src="/rotelli/equipe.jpg" alt="Equipe da Clínica Rotelli" className="rounded-3xl shadow-xl shadow-brand/10 w-full object-cover aspect-[4/3]" />
+          <img src="/rotelli/equipe.jpg" alt="Equipe da Clínica Rotelli" className="rounded-3xl shadow-xl shadow-brand/10 w-full h-auto" />
           <div className="space-y-4">
             {EQUIPE.map((m) => (
               <div key={m.nome} className="rounded-2xl border border-line bg-card p-5 shadow-sm flex gap-4">
@@ -212,20 +210,32 @@ export default function Site() {
         </div>
       </Section>
 
-      {/* A CLÍNICA (galeria) */}
-      <Section className="bg-cream-2">
-        <div className="text-center mb-12">
-          <Eyebrow>Conheça por dentro</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">A clínica</h2>
+      {/* AVALIAÇÕES NO GOOGLE */}
+      <Section id="avaliacoes" className="bg-cream-2">
+        <div className="text-center mb-10">
+          <Eyebrow>Reputação</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Avaliações no Google</h2>
+          <div className="inline-flex items-center gap-3 mt-5 rounded-2xl border border-line bg-card px-5 py-3 shadow-sm">
+            <span className="text-3xl font-extrabold text-brand">{AVALIACOES.nota}</span>
+            <span className="flex gap-0.5 text-brand">{Array.from({ length: 5 }).map((_, k) => <Star key={k} size={16} fill="currentColor" />)}</span>
+            <span className="text-muted text-sm">no Google</span>
+          </div>
         </div>
-        <div className="grid sm:grid-cols-3 gap-5">
-          {CLINICA.map((c) => (
-            <figure key={c.img} className="relative rounded-3xl overflow-hidden border border-line shadow-sm group">
-              <img src={c.img} alt={c.t} className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition duration-500" />
-              <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent text-white text-sm font-semibold px-4 py-3">{c.t}</figcaption>
-            </figure>
+        <div className="grid md:grid-cols-3 gap-5">
+          {AVALIACOES.reviews.map((r, i) => (
+            <div key={i} className="rounded-3xl border border-line bg-card p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-full bg-brand-soft text-brand-dark font-bold flex items-center justify-center text-sm">{r.nome[0]}</div>
+                <div>
+                  <div className="font-semibold text-sm">{r.nome}</div>
+                  <div className="flex gap-0.5 text-brand">{Array.from({ length: 5 }).map((_, k) => <Star key={k} size={11} fill="currentColor" />)}</div>
+                </div>
+              </div>
+              <p className="text-ink/80 text-sm">{r.txt}</p>
+            </div>
           ))}
         </div>
+        <p className="text-muted/60 text-xs text-center mt-6">Nota e avaliações de demonstração — as reais entram com o print do Google.</p>
       </Section>
 
       {/* SERVIÇOS */}
@@ -284,6 +294,16 @@ export default function Site() {
               <MessageCircle size={18} /> Falar no WhatsApp
             </Link>
           </div>
+        </div>
+        {/* mapa do Google (sem chave; pino exato ajusta com o endereço real) */}
+        <div className="mt-8 rounded-3xl overflow-hidden border border-line shadow-sm">
+          <iframe
+            title="Localização da Clínica Rotelli em São Bernardo do Campo"
+            src="https://maps.google.com/maps?q=Clinica%20Rotelli%20Sao%20Bernardo%20do%20Campo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            className="w-full h-80 border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </Section>
 
