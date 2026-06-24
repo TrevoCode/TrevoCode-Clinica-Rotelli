@@ -3,6 +3,7 @@ import {
   MessageCircle, CalendarCheck, MapPin, Clock, Phone,
   Sparkles, Stethoscope, ShieldCheck, HeartHandshake, Star, Award, GraduationCap,
   ChevronRight, CreditCard, Smile, Building2, Camera,
+  Users, FileText, ChevronDown, CheckCircle2, Zap,
 } from "lucide-react";
 import { Logo, PorTrevocode } from "../_components/brand";
 
@@ -13,8 +14,9 @@ const WHATS = "/atendimento"; // no demo aponta pro simulador do bot; em produç
 
 const NAV = [
   { href: "#especialidades", label: "Especialidades" },
+  { href: "#como-funciona", label: "Como funciona" },
   { href: "#resultados", label: "Resultados" },
-  { href: "#equipe", label: "Equipe" },
+  { href: "#faq", label: "Dúvidas" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -60,6 +62,40 @@ const SERVICOS = [
   { img: "/rotelli/servicos/servico-extracao.png", t: "Extração e siso", d: "Remoção segura, incluindo sisos, com todo o conforto." },
   { img: "/rotelli/servicos/servico-ortodontia.png", t: "Ortodontia", d: "Alinhe os dentes com aparelho ou alinhadores transparentes." },
   { img: "/rotelli/servicos/servico-odontopediatria.png", t: "Odontopediatria", d: "Cuidado gentil e acolhedor para as crianças." },
+];
+
+const STATS = [
+  { Icon: Smile, n: "+5 mil", l: "sorrisos cuidados" },
+  { Icon: Award, n: "10 anos", l: "de experiência" },
+  { Icon: Star, n: "5,0", l: "no Google" },
+  { Icon: Users, n: "2", l: "especialistas" },
+];
+
+const DORES = [
+  { Icon: Camera, t: "Cobre a boca pra sorrir", d: "Você evita foto e até de rir alto por causa dos dentes." },
+  { Icon: ShieldCheck, t: "Já se sentiu enganado", d: "Saiu de outra clínica com a sensação de que empurraram tratamento." },
+  { Icon: CreditCard, t: "Adiou por causa do custo", d: "Achou caro, não entendeu o porquê e foi deixando pra depois." },
+  { Icon: HeartHandshake, t: "Tem medo de dentista", d: "Uma experiência ruim na infância te deixou com receio até hoje." },
+];
+
+const PASSOS = [
+  { Icon: MessageCircle, t: "Chama no WhatsApp", d: "Uma pessoa de verdade responde rápido, tira suas dúvidas e marca no melhor horário pra você." },
+  { Icon: CalendarCheck, t: "Avaliação sem compromisso", d: "O dentista examina com calma, explica o seu caso e monta o plano — sem diagnóstico de corredor." },
+  { Icon: FileText, t: "Plano claro", d: "Você recebe o que vai ser feito, o prazo e o valor. Sem surpresa, sem pegadinha." },
+  { Icon: Smile, t: "Comece no seu tempo", d: "Pensa em casa, tira dúvidas. O tratamento começa quando você decidir — sem pressão." },
+];
+
+const CONVENIOS = ["Amil Dental", "Bradesco Dental", "SulAmérica Odonto", "Particular"];
+
+const FAQ = [
+  { q: "A avaliação é paga?", a: "A primeira avaliação é gratuita. O dentista examina, entende o seu caso e monta o plano de tratamento. Você só investe se decidir começar." },
+  { q: "Vocês atendem convênio?", a: "Atendemos Amil Dental, Bradesco Dental e SulAmérica Odonto, além de particular. Se o seu convênio não estiver na lista, confirme com a equipe pelo WhatsApp." },
+  { q: "Vou ser pressionado a fechar na hora?", a: "Não. Você recebe o plano, leva pra casa, pesquisa e decide com calma. Tratamento bem feito não precisa de pressão." },
+  { q: "Tenho medo de dentista. E agora?", a: "A gente explica cada etapa antes de fazer, respeita o seu tempo e o seu ritmo. Você está no controle do atendimento." },
+  { q: "Quanto tempo demora um implante?", a: "Depende do caso. Em geral, leva alguns meses entre a colocação do pino, a cicatrização e a coroa. Tudo é explicado na avaliação, sem surpresa no meio do caminho." },
+  { q: "Como funciona o pagamento?", a: "Aceitamos dinheiro, Pix, cartão de débito e crédito, com parcelamento em até 12x. As condições são combinadas na avaliação." },
+  { q: "Atendem quem é de fora de São Bernardo?", a: "Sim! Recebemos pacientes da região do ABC e de São Paulo. A gente organiza os horários pra otimizar o seu deslocamento." },
+  { q: "É urgência, o que faço?", a: "Em caso de dor forte ou trauma, chama no WhatsApp que a gente prioriza o seu encaixe sempre que possível." },
 ];
 
 function Section({ id, children, className = "" }: { id?: string; children: React.ReactNode; className?: string }) {
@@ -131,6 +167,19 @@ export default function Site() {
         </div>
       </section>
 
+      {/* STATS */}
+      <section className="bg-ink text-cream">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+          {STATS.map((s) => (
+            <div key={s.l} className="flex flex-col items-center">
+              <s.Icon size={22} className="text-brand-light mb-1.5" />
+              <div className="text-3xl sm:text-4xl font-extrabold text-brand-light">{s.n}</div>
+              <div className="text-cream/70 text-sm mt-1">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ESPECIALIDADES */}
       <Section id="especialidades" className="bg-cream-2">
         <div className="text-center mb-12">
@@ -151,6 +200,29 @@ export default function Site() {
               </div>
             </div>
           ))}
+        </div>
+      </Section>
+
+      {/* DOR / EMPATIA */}
+      <Section>
+        <div className="text-center mb-12">
+          <Eyebrow>A gente entende</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Pare de adiar o seu sorriso</h2>
+          <p className="text-muted mt-3 max-w-2xl mx-auto">Se você se identifica com algum desses, não está sozinho — e tem solução.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {DORES.map((d) => (
+            <div key={d.t} className="rounded-2xl border border-line bg-card p-5 shadow-sm">
+              <d.Icon size={22} className="text-brand" />
+              <div className="font-bold mt-2">{d.t}</div>
+              <div className="text-muted text-sm mt-1">{d.d}</div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link href={WHATS} className="inline-flex items-center gap-2 rounded-full brand-gradient text-white font-bold px-6 py-3 shadow-lg shadow-brand/20 hover:brightness-105 transition">
+            <MessageCircle size={18} /> Falar com a gente, sem compromisso
+          </Link>
         </div>
       </Section>
 
@@ -191,6 +263,27 @@ export default function Site() {
               </div>
             ))}
           </div>
+        </div>
+      </Section>
+
+      {/* COMO FUNCIONA */}
+      <Section id="como-funciona" className="bg-cream-2">
+        <div className="text-center mb-12">
+          <Eyebrow>Simples assim</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Como funciona</h2>
+          <p className="text-muted mt-3 max-w-2xl mx-auto">Quatro passos. Zero pressão. Zero pegadinha.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {PASSOS.map((p, i) => (
+            <div key={p.t} className="rounded-3xl border border-line bg-card p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-9 h-9 rounded-full brand-gradient text-white font-bold flex items-center justify-center">{i + 1}</span>
+                <p.Icon size={22} className="text-brand" />
+              </div>
+              <div className="font-bold">{p.t}</div>
+              <div className="text-muted text-sm mt-1">{p.d}</div>
+            </div>
+          ))}
         </div>
       </Section>
 
@@ -264,9 +357,22 @@ export default function Site() {
             </div>
           ))}
         </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm text-muted">
-          <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5"><CreditCard size={14} className="text-brand" /> Dinheiro, Pix e cartão · até 12x</span>
-          <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5"><ShieldCheck size={14} className="text-brand" /> Convênios Amil, Bradesco e SulAmérica</span>
+      </Section>
+
+      {/* CONVÊNIOS */}
+      <Section className="bg-cream-2">
+        <div className="text-center mb-8">
+          <Eyebrow>Facilidade</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Convênios e pagamento</h2>
+          <p className="text-muted mt-3 max-w-2xl mx-auto">Atendemos os principais convênios e facilitamos o particular.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {CONVENIOS.map((c) => (
+            <span key={c} className="rounded-2xl border border-line bg-card px-5 py-3 font-semibold text-ink/80 shadow-sm">{c}</span>
+          ))}
+        </div>
+        <div className="flex justify-center mt-5">
+          <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-4 py-2 text-sm text-muted"><CreditCard size={14} className="text-brand" /> Dinheiro, Pix e cartão · até 12x sem juros</span>
         </div>
       </Section>
 
@@ -284,6 +390,25 @@ export default function Site() {
           ))}
         </div>
         <p className="text-muted/60 text-xs text-center mt-6">Mensagens reais de pacientes, compartilhadas com autorização.</p>
+      </Section>
+
+      {/* FAQ */}
+      <Section id="faq">
+        <div className="text-center mb-10">
+          <Eyebrow>Dúvidas frequentes</Eyebrow>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Antes de agendar</h2>
+        </div>
+        <div className="max-w-3xl mx-auto space-y-3">
+          {FAQ.map((f) => (
+            <details key={f.q} className="group rounded-2xl border border-line bg-card px-5 py-4 shadow-sm">
+              <summary className="flex items-center justify-between gap-3 cursor-pointer font-semibold list-none [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <ChevronDown size={18} className="text-brand shrink-0 transition group-open:rotate-180" />
+              </summary>
+              <p className="text-muted text-sm mt-3">{f.a}</p>
+            </details>
+          ))}
+        </div>
       </Section>
 
       {/* CONTATO / LOCALIZAÇÃO */}
@@ -320,6 +445,26 @@ export default function Site() {
         </div>
       </Section>
 
+      {/* CTA FINAL */}
+      <section className="px-5 sm:px-8 py-16 sm:py-20 bg-cream-2">
+        <div className="max-w-4xl mx-auto rounded-[2rem] brand-gradient text-white p-8 sm:p-12 text-center shadow-xl shadow-brand/20">
+          <span className="inline-flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1 text-xs font-semibold mb-4"><Zap size={13} /> Resposta rápida no horário comercial</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Daqui a um ano, você vai querer ter começado hoje.</h2>
+          <p className="text-white/85 mt-3 max-w-xl mx-auto">Avaliação gratuita, plano claro e sem pressão pra fechar. Dê o primeiro passo pelo WhatsApp.</p>
+          <div className="grid sm:grid-cols-3 gap-3 mt-8 text-left">
+            {[["Avaliação gratuita", "Diagnóstico e plano, sem pagar nada."], ["Sem pressão", "Pensa em casa e decide no seu tempo."], ["Parcele em 12x", "Cabe no orçamento, sem surpresa."]].map(([t, d]) => (
+              <div key={t} className="bg-white/10 rounded-2xl p-4 flex gap-2">
+                <CheckCircle2 size={18} className="shrink-0 mt-0.5" />
+                <div><div className="font-bold text-sm">{t}</div><div className="text-white/80 text-xs">{d}</div></div>
+              </div>
+            ))}
+          </div>
+          <Link href={WHATS} className="inline-flex items-center gap-2 mt-8 rounded-full bg-card text-brand font-bold px-7 py-3.5 hover:brightness-105 transition">
+            <MessageCircle size={18} /> Agendar minha avaliação
+          </Link>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="border-t border-line px-5 sm:px-8 py-10">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -336,6 +481,15 @@ export default function Site() {
           </div>
         </div>
       </footer>
+
+      {/* Botão WhatsApp flutuante */}
+      <Link
+        href={WHATS}
+        aria-label="Agendar pelo WhatsApp"
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full brand-gradient text-white font-bold px-5 py-3.5 shadow-xl shadow-brand/30 hover:brightness-105 transition"
+      >
+        <MessageCircle size={20} /> <span className="hidden sm:inline">Agendar</span>
+      </Link>
     </main>
   );
 }
