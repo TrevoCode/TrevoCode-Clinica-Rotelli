@@ -3,7 +3,7 @@ import {
   MessageCircle, CalendarCheck, MapPin, Clock, Phone,
   Sparkles, Stethoscope, ShieldCheck, HeartHandshake, Star, Award, GraduationCap,
   ChevronRight, CreditCard, Smile, Building2, Camera,
-  Users, FileText, ChevronDown, CheckCircle2, Zap,
+  FileText, ChevronDown, CheckCircle2, Zap,
 } from "lucide-react";
 import { Logo, PorTrevocode } from "../_components/brand";
 
@@ -64,11 +64,13 @@ const SERVICOS = [
   { img: "/rotelli/servicos/servico-odontopediatria.png", t: "Odontopediatria", d: "Cuidado gentil e acolhedor para as crianças." },
 ];
 
+// Barra de garantias (claims honestos). Quando o Fabricio passar os números reais
+// (anos, pacientes, especialistas, nota Google), trocar por stats numéricos.
 const STATS = [
-  { Icon: Smile, n: "+5 mil", l: "sorrisos cuidados" },
-  { Icon: Award, n: "10 anos", l: "de experiência" },
-  { Icon: Star, n: "5,0", l: "no Google" },
-  { Icon: Users, n: "2", l: "especialistas" },
+  { Icon: CalendarCheck, t: "Avaliação gratuita" },
+  { Icon: FileText, t: "Plano claro, sem surpresa" },
+  { Icon: Award, t: "Especialista em implante e HOF" },
+  { Icon: HeartHandshake, t: "Atendimento humanizado" },
 ];
 
 const DORES = [
@@ -85,7 +87,8 @@ const PASSOS = [
   { Icon: Smile, t: "Comece no seu tempo", d: "Pensa em casa, tira dúvidas. O tratamento começa quando você decidir — sem pressão." },
 ];
 
-const CONVENIOS = ["Amil Dental", "Bradesco Dental", "SulAmérica Odonto", "Particular"];
+// Convênios confirmados na base. Falta o Fabricio confirmar a lista completa real.
+const CONVENIOS = ["Amil Dental", "Bradesco Dental", "SulAmérica"];
 
 const FAQ = [
   { q: "A avaliação é paga?", a: "A primeira avaliação é gratuita. O dentista examina, entende o seu caso e monta o plano de tratamento. Você só investe se decidir começar." },
@@ -167,14 +170,13 @@ export default function Site() {
         </div>
       </section>
 
-      {/* STATS */}
+      {/* BARRA DE GARANTIAS */}
       <section className="bg-ink text-cream">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           {STATS.map((s) => (
-            <div key={s.l} className="flex flex-col items-center">
-              <s.Icon size={22} className="text-brand-light mb-1.5" />
-              <div className="text-3xl sm:text-4xl font-extrabold text-brand-light">{s.n}</div>
-              <div className="text-cream/70 text-sm mt-1">{s.l}</div>
+            <div key={s.t} className="flex flex-col items-center gap-2">
+              <s.Icon size={24} className="text-brand-light" />
+              <div className="text-cream/90 text-sm font-semibold">{s.t}</div>
             </div>
           ))}
         </div>
@@ -361,18 +363,17 @@ export default function Site() {
 
       {/* CONVÊNIOS */}
       <Section className="bg-cream-2">
-        <div className="text-center mb-8">
-          <Eyebrow>Facilidade</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Convênios e pagamento</h2>
-          <p className="text-muted mt-3 max-w-2xl mx-auto">Atendemos os principais convênios e facilitamos o particular.</p>
-        </div>
-        <div className="flex flex-wrap justify-center gap-3">
-          {CONVENIOS.map((c) => (
-            <span key={c} className="rounded-2xl border border-line bg-card px-5 py-3 font-semibold text-ink/80 shadow-sm">{c}</span>
-          ))}
-        </div>
-        <div className="flex justify-center mt-5">
-          <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-4 py-2 text-sm text-muted"><CreditCard size={14} className="text-brand" /> Dinheiro, Pix e cartão · até 12x sem juros</span>
+        <div className="text-center">
+          <div className="text-muted text-xs font-bold tracking-[0.2em] uppercase mb-10">Atendemos os principais convênios odontológicos</div>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+            {CONVENIOS.map((c) => (
+              <span key={c} className="text-2xl sm:text-3xl font-semibold text-ink/30 tracking-tight">{c}</span>
+            ))}
+            <span className="text-2xl sm:text-3xl font-semibold text-ink/30 tracking-tight">e particular</span>
+          </div>
+          <div className="flex justify-center mt-12">
+            <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-4 py-2 text-sm text-muted"><CreditCard size={14} className="text-brand" /> Dinheiro, Pix e cartão · até 12x sem juros</span>
+          </div>
         </div>
       </Section>
 
