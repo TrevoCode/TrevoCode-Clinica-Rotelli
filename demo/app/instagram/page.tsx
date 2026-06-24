@@ -1,97 +1,103 @@
 import Link from "next/link";
+import {
+  Play, Images, Circle, GraduationCap, Award, Tag, Building2, Heart, Camera,
+  Sparkles, ClipboardCheck, MapPin, ChevronLeft, Target, MessageCircle, MoreHorizontal,
+} from "lucide-react";
 import { Logo, PorTrevocode } from "../_components/brand";
 
 // Mockup do Instagram @clinicarotelli — vitrine "mastigada" pro Dr. Claudio ver o que vai ser postado.
-// Conteúdo dos 12 posts vem de apresentacao/PILAR-A-INSTAGRAM.md. Imagens são representações
-// (gradiente + ícone) porque a produção real acontece na sessão de gravação pós-fechamento.
+// Conteúdo dos 12 posts vem de apresentacao/PILAR-A-INSTAGRAM.md. Ícones Lucide padronizados por pilar
+// e formato (sem emoji). A produção visual real acontece na sessão de gravação pós-fechamento.
 
 type Tipo = "Reels" | "Carrossel" | "Stories";
+type Pilar = "Educação" | "Autoridade" | "Oferta" | "Humanização" | "Prova social" | "Bastidores";
 type Post = {
   n: number;
   tipo: Tipo;
-  pilar: string;
+  pilar: Pilar;
   quem: "Dr. Claudio" | "Dr. Lucas" | "Clínica";
   gancho: string;
-  visual: string;
   legenda: string;
   cta: string;
-  emoji: string;
 };
 
 const POSTS: Post[] = [
-  { n: 1, tipo: "Reels", pilar: "Educação", quem: "Dr. Claudio", emoji: "🦷",
+  { n: 1, tipo: "Reels", pilar: "Educação", quem: "Dr. Claudio",
     gancho: "Implante dói?",
-    visual: "Dr. Claudio falando direto pra câmera, clínica ao fundo.",
     legenda: "A pergunta nº1 do consultório. Feito com anestesia, a maioria volta a trabalhar no dia seguinte. O que assusta é o desconhecido — deixa eu explicar em 40s.",
-    cta: "Chama no WhatsApp 👉 link na bio" },
-  { n: 2, tipo: "Carrossel", pilar: "Autoridade", quem: "Dr. Claudio", emoji: "🪥",
+    cta: "Chama no WhatsApp · link na bio" },
+  { n: 2, tipo: "Carrossel", pilar: "Autoridade", quem: "Dr. Claudio",
     gancho: "Implante, passo a passo",
-    visual: "6 cards limpos: avaliação → raio-x → colocação → cicatrização → coroa → sorriso.",
     legenda: "Como é colocar um implante, do começo ao fim. Desmistifica e mostra o método.",
     cta: "Quer saber se você pode fazer? Manda mensagem." },
-  { n: 3, tipo: "Reels", pilar: "Oferta", quem: "Dr. Claudio", emoji: "⏳",
+  { n: 3, tipo: "Reels", pilar: "Oferta", quem: "Dr. Claudio",
     gancho: "Perdeu um dente e está adiando?",
-    visual: "Tom acolhedor; texto: 'cada mês que passa o osso reabsorve'.",
     legenda: "Aquele dente que você perdeu e foi 'deixando pra depois'… cada mês conta.",
     cta: "Avaliação pra implante — agende no WhatsApp." },
-  { n: 4, tipo: "Reels", pilar: "Educação", quem: "Dr. Claudio", emoji: "✨",
+  { n: 4, tipo: "Reels", pilar: "Educação", quem: "Dr. Claudio",
     gancho: "Cansou de parecer cansada mesmo dormindo bem?",
-    visual: "Dr. Claudio explicando que HOF natural é sutil; b-roll da clínica.",
     legenda: "Harmonização orofacial bem feita é discreta: realça o que você já tem, sem parecer 'feita'.",
     cta: "Vem entender o que combina com o seu rosto — chama no WhatsApp." },
-  { n: 5, tipo: "Carrossel", pilar: "Educação", quem: "Dr. Claudio", emoji: "💬",
+  { n: 5, tipo: "Carrossel", pilar: "Educação", quem: "Dr. Claudio",
     gancho: "Mitos da harmonização orofacial",
-    visual: "Cards mito vs verdade: 'vai ficar artificial?', 'é só pra famoso?', 'incha pra sempre?'.",
     legenda: "Os 3 mitos que mais seguram quem tem vontade de fazer HOF.",
     cta: "Dúvida sobre o seu caso? Manda mensagem." },
-  { n: 6, tipo: "Reels", pilar: "Autoridade", quem: "Dr. Claudio", emoji: "🙂",
+  { n: 6, tipo: "Reels", pilar: "Autoridade", quem: "Dr. Claudio",
     gancho: "O que é HOF (e o que NÃO é)",
-    visual: "Dr. Claudio, 45s, linguagem simples; saúde + estética do sorriso.",
     legenda: "Harmonização não é exagero. É equilíbrio entre saúde e estética do rosto.",
     cta: "Avaliação personalizada no WhatsApp." },
-  { n: 7, tipo: "Reels", pilar: "Oferta", quem: "Dr. Lucas", emoji: "📆",
+  { n: 7, tipo: "Reels", pilar: "Oferta", quem: "Dr. Lucas",
     gancho: "Quanto tempo sem ir ao dentista?",
-    visual: "Dr. Lucas, leve e acolhedor.",
     legenda: "Limpeza a cada 6 meses evita problema caro lá na frente. Sua boca te agradece.",
     cta: "Agende sua avaliação — WhatsApp na bio." },
-  { n: 8, tipo: "Carrossel", pilar: "Educação", quem: "Dr. Lucas", emoji: "🔎",
+  { n: 8, tipo: "Carrossel", pilar: "Educação", quem: "Dr. Lucas",
     gancho: "5 sinais de que você precisa de avaliação",
-    visual: "Cards: sangra ao escovar / sensibilidade / mau hálito / dente escuro / dor ao mastigar.",
     legenda: "Seu corpo avisa antes de virar problema grande. Olha esses 5 sinais.",
     cta: "Tem algum desses? Chama no WhatsApp." },
-  { n: 9, tipo: "Reels", pilar: "Educação", quem: "Dr. Lucas", emoji: "😁",
+  { n: 9, tipo: "Reels", pilar: "Educação", quem: "Dr. Lucas",
     gancho: "Clareamento: o que funciona e o que é mito",
-    visual: "Dr. Lucas; alerta contra 'receita caseira' que danifica.",
     legenda: "Carvão, limão, bicarbonato? Cuidado. Clareamento seguro é com acompanhamento.",
     cta: "Clareamento seguro com a gente — agende no WhatsApp." },
-  { n: 10, tipo: "Reels", pilar: "Humanização", quem: "Clínica", emoji: "🏥",
+  { n: 10, tipo: "Reels", pilar: "Humanização", quem: "Clínica",
     gancho: "Se você tem medo de dentista, esse vídeo é pra você",
-    visual: "Tour de 30s: recepção, consultório, equipamentos, equipe sorrindo.",
     legenda: "Conheça a Clínica Rotelli por dentro — o ambiente que faz a diferença.",
     cta: "Venha conhecer sem compromisso — WhatsApp na bio." },
-  { n: 11, tipo: "Reels", pilar: "Prova social", quem: "Clínica", emoji: "❤️",
+  { n: 11, tipo: "Reels", pilar: "Prova social", quem: "Clínica",
     gancho: "O que a paciente achou",
-    visual: "Depoimento real e curto (com consentimento), legenda queimada.",
     legenda: "Quem já sentou na nossa cadeira conta como foi a experiência.",
     cta: "Quer esse resultado também? Manda mensagem." },
-  { n: 12, tipo: "Stories", pilar: "Bastidores", quem: "Clínica", emoji: "📸",
+  { n: 12, tipo: "Stories", pilar: "Bastidores", quem: "Clínica",
     gancho: "Bastidores do dia + enquete",
-    visual: "4 stories: bastidor → enquete 'qual procedimento é esse?' → dica → figurinha de WhatsApp.",
     legenda: "Sequência semanal que mantém o perfil vivo e puxa DM.",
     cta: "Responde a enquete e chama no WhatsApp." },
 ];
 
-const HIGHLIGHTS = [
-  { e: "🦷", t: "Implante" },
-  { e: "✨", t: "Harmonização" },
-  { e: "📸", t: "Antes/Depois" },
-  { e: "🏥", t: "A Clínica" },
-  { e: "❤️", t: "Depoimentos" },
-  { e: "📆", t: "Avaliação" },
+const PILAR_ICON: Record<Pilar, typeof Award> = {
+  Educação: GraduationCap,
+  Autoridade: Award,
+  Oferta: Tag,
+  Humanização: Building2,
+  "Prova social": Heart,
+  Bastidores: Camera,
+};
+
+const TIPO_ICON: Record<Tipo, typeof Play> = {
+  Reels: Play,
+  Carrossel: Images,
+  Stories: Circle,
+};
+
+const HIGHLIGHTS: { Icon: typeof Award; t: string }[] = [
+  { Icon: Award, t: "Implante" },
+  { Icon: Sparkles, t: "Harmonização" },
+  { Icon: Images, t: "Antes/Depois" },
+  { Icon: Building2, t: "A Clínica" },
+  { Icon: Heart, t: "Depoimentos" },
+  { Icon: ClipboardCheck, t: "Avaliação" },
 ];
 
 // Gradiente quente por pilar — dá variação no feed sem foto real.
-const TINT: Record<string, string> = {
+const TINT: Record<Pilar, string> = {
   Educação: "from-[#E89A63] to-[#DA6527]",
   Autoridade: "from-[#DA6527] to-[#BF541C]",
   Oferta: "from-[#BF541C] to-[#8A3d12]",
@@ -101,21 +107,21 @@ const TINT: Record<string, string> = {
 };
 
 function TipoTag({ tipo }: { tipo: Tipo }) {
-  const ic = tipo === "Reels" ? "▶" : tipo === "Carrossel" ? "▢▢" : "○";
+  const Icon = TIPO_ICON[tipo];
   return (
     <span className="inline-flex items-center gap-1 text-[10px] font-bold rounded-full bg-card/90 text-brand-dark px-2 py-0.5 shadow-sm">
-      {ic} {tipo}
+      <Icon size={11} /> {tipo}
     </span>
   );
 }
 
 function Tile({ p }: { p: Post }) {
+  const Icon = PILAR_ICON[p.pilar];
+  const TipoI = TIPO_ICON[p.tipo];
   return (
-    <div className={`relative aspect-square rounded-sm overflow-hidden bg-gradient-to-br ${TINT[p.pilar] ?? TINT["Educação"]} flex flex-col justify-between p-2`}>
-      <div className="flex justify-end">
-        <span className="text-white/90 text-[11px]">{p.tipo === "Reels" ? "▶" : p.tipo === "Carrossel" ? "▢" : "○"}</span>
-      </div>
-      <div className="text-4xl text-center drop-shadow">{p.emoji}</div>
+    <div className={`relative aspect-square overflow-hidden bg-gradient-to-br ${TINT[p.pilar]} flex flex-col justify-between p-2`}>
+      <div className="flex justify-end text-white/90"><TipoI size={13} /></div>
+      <div className="flex justify-center text-white drop-shadow"><Icon size={34} strokeWidth={1.5} /></div>
       <div className="text-white text-[10px] sm:text-[11px] font-bold leading-tight line-clamp-2 drop-shadow">
         {p.gancho}
       </div>
@@ -138,9 +144,9 @@ export default function Instagram() {
           </div>
           <Link
             href="/proposta"
-            className="text-xs font-bold rounded-full border border-brand/40 text-brand px-4 py-2 hover:bg-brand-soft transition"
+            className="flex items-center gap-1 text-xs font-bold rounded-full border border-brand/40 text-brand px-4 py-2 hover:bg-brand-soft transition"
           >
-            ‹ Voltar à proposta
+            <ChevronLeft size={14} /> Voltar à proposta
           </Link>
         </div>
       </header>
@@ -162,7 +168,7 @@ export default function Instagram() {
             {/* topo do app */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-line">
               <span className="font-bold text-sm">@clinicarotelli</span>
-              <span className="text-muted text-lg leading-none">⋯</span>
+              <MoreHorizontal size={18} className="text-muted" />
             </div>
 
             {/* header do perfil */}
@@ -184,9 +190,9 @@ export default function Instagram() {
                 <div className="font-bold">Clínica Rotelli · Odontologia</div>
                 <div className="text-ink/80 leading-snug mt-0.5">
                   Implante · Harmonização Orofacial · Odontologia geral<br />
-                  Dr. Claudio Rotelli — CRO-SP <span className="text-muted">‹nº›</span><br />
-                  📍 São Bernardo do Campo/SP<br />
-                  <span className="text-brand font-semibold">👇 Agende sua avaliação no WhatsApp</span>
+                  Dr. Claudio Rotelli — CRO-SP <span className="text-muted">‹nº›</span>
+                  <span className="flex items-center gap-1 mt-0.5"><MapPin size={12} className="text-brand" /> São Bernardo do Campo/SP</span>
+                  <span className="flex items-center gap-1 text-brand font-semibold mt-0.5"><MessageCircle size={12} /> Agende sua avaliação no WhatsApp</span>
                 </div>
               </div>
 
@@ -199,7 +205,7 @@ export default function Instagram() {
               <div className="flex gap-3 overflow-x-auto py-4">
                 {HIGHLIGHTS.map((h) => (
                   <div key={h.t} className="flex flex-col items-center gap-1 shrink-0">
-                    <div className="w-14 h-14 rounded-full border border-line bg-cream-2 flex items-center justify-center text-xl">{h.e}</div>
+                    <div className="w-14 h-14 rounded-full border border-line bg-cream-2 flex items-center justify-center text-brand"><h.Icon size={20} /></div>
                     <span className="text-[10px] text-muted">{h.t}</span>
                   </div>
                 ))}
@@ -229,28 +235,34 @@ export default function Instagram() {
                 <div className="font-bold mb-1">4–5 posts/semana + stories</div>
                 <div className="text-muted text-sm">Reels puxam alcance, carrossel gera autoridade. 1 sessão de gravação a cada 2–3 semanas abastece tudo.</div>
               </div>
-              <div className="rounded-2xl border border-brand/40 bg-brand-soft p-4 shadow-sm sm:col-span-2">
-                <div className="font-bold text-brand-dark mb-1">🎯 Todo post termina no mesmo lugar: o WhatsApp</div>
-                <div className="text-ink/75 text-sm">É lá que o bot pega o lead, responde na hora e agenda. Instagram enche o topo do funil; o bot converte.</div>
+              <div className="rounded-2xl border border-brand/40 bg-brand-soft p-4 shadow-sm sm:col-span-2 flex items-start gap-2">
+                <Target size={18} className="text-brand-dark shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold text-brand-dark mb-1">Todo post termina no mesmo lugar: o WhatsApp</div>
+                  <div className="text-ink/75 text-sm">É lá que o bot pega o lead, responde na hora e agenda. Instagram enche o topo do funil; o bot converte.</div>
+                </div>
               </div>
             </div>
 
             <h2 className="text-xl font-extrabold tracking-tight mt-8 mb-3">Os 12 posts, mastigados</h2>
             <div className="space-y-3">
-              {POSTS.map((p) => (
-                <div key={p.n} className="rounded-2xl border border-line bg-card p-4 shadow-sm flex gap-3">
-                  <div className={`shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${TINT[p.pilar] ?? TINT["Educação"]} flex items-center justify-center text-2xl`}>{p.emoji}</div>
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <TipoTag tipo={p.tipo} />
-                      <span className="text-[10px] text-muted">{p.pilar} · {p.quem}</span>
+              {POSTS.map((p) => {
+                const Icon = PILAR_ICON[p.pilar];
+                return (
+                  <div key={p.n} className="rounded-2xl border border-line bg-card p-4 shadow-sm flex gap-3">
+                    <div className={`shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${TINT[p.pilar]} flex items-center justify-center text-white`}><Icon size={22} strokeWidth={1.5} /></div>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <TipoTag tipo={p.tipo} />
+                        <span className="text-[10px] text-muted">{p.pilar} · {p.quem}</span>
+                      </div>
+                      <div className="font-bold mt-1">{p.n}. “{p.gancho}”</div>
+                      <div className="text-muted text-sm mt-0.5">{p.legenda}</div>
+                      <div className="flex items-center gap-1 text-brand text-xs font-semibold mt-1"><MessageCircle size={12} /> {p.cta}</div>
                     </div>
-                    <div className="font-bold mt-1">{p.n}. “{p.gancho}”</div>
-                    <div className="text-muted text-sm mt-0.5">{p.legenda}</div>
-                    <div className="text-brand text-xs font-semibold mt-1">{p.cta}</div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -259,8 +271,8 @@ export default function Instagram() {
         <div className="mt-10 rounded-3xl brand-gradient text-white p-6 sm:p-8 text-center shadow-lg shadow-brand/20">
           <div className="text-xl sm:text-2xl font-extrabold">Quer ver o que acontece depois que o paciente chama?</div>
           <p className="text-white/85 mt-1">O Instagram traz a conversa. O bot responde, orienta e agenda — sem deixar ninguém no vácuo.</p>
-          <Link href="/atendimento" className="inline-block mt-4 rounded-full bg-card text-brand font-bold px-6 py-3 hover:brightness-105 transition">
-            💬 Abrir o simulador do WhatsApp
+          <Link href="/atendimento" className="inline-flex items-center gap-2 mt-4 rounded-full bg-card text-brand font-bold px-6 py-3 hover:brightness-105 transition">
+            <MessageCircle size={18} /> Abrir o simulador do WhatsApp
           </Link>
         </div>
 

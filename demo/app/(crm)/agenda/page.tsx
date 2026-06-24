@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CalendarCheck } from "lucide-react";
 
 type Doutor = { id: string; nome: string; especialidade: string };
 type Slot = { doutor: string; data: string; hora: string; status: string };
@@ -67,7 +68,7 @@ export default function Agenda() {
 
       {/* faixa de integração Google Agenda */}
       <div className="rounded-xl border border-line bg-card p-3 mb-4 flex items-center gap-2 text-sm">
-        <span className="text-lg">🗓️</span>
+        <CalendarCheck size={18} className="text-brand shrink-0" />
         <span className="text-ink/80">
           Agendamentos do bot são gravados direto no <b>Google Agenda</b> do doutor.
         </span>

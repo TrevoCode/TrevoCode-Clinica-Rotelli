@@ -1,5 +1,12 @@
 import Link from "next/link";
+import { FileText, Camera, MessageCircle, LayoutDashboard, CalendarDays, ChevronRight } from "lucide-react";
 import { Logo, PorTrevocode } from "./_components/brand";
+
+const ATALHOS = [
+  { href: "/atendimento", Icon: MessageCircle, label: "Atendimento", sub: "WhatsApp + bot" },
+  { href: "/painel", Icon: LayoutDashboard, label: "Painel", sub: "visão da recepção" },
+  { href: "/agenda", Icon: CalendarDays, label: "Agenda", sub: "horários por doutor" },
+];
 
 export default function Home() {
   return (
@@ -21,7 +28,10 @@ export default function Home() {
           href="/proposta"
           className="brand-gradient text-white block rounded-3xl p-5 mt-8 shadow-lg shadow-brand/20 hover:brightness-105 transition"
         >
-          <div className="font-bold text-lg flex items-center gap-2">📄 Ver a apresentação →</div>
+          <div className="font-bold text-lg flex items-center gap-2">
+            <FileText size={20} /> Ver a apresentação
+            <ChevronRight size={18} className="ml-auto" />
+          </div>
           <div className="text-white/85 text-sm mt-0.5">
             Proposta completa: captação, demonstração, investimento e próximos passos.
           </div>
@@ -32,40 +42,27 @@ export default function Home() {
           href="/instagram"
           className="bg-card rounded-3xl border border-brand/30 p-5 mt-4 flex items-center gap-3 hover:border-brand hover:shadow-md transition"
         >
-          <div className="text-3xl">📸</div>
+          <Camera size={26} className="text-brand" />
           <div className="flex-1">
             <div className="font-bold">O Instagram pronto pra postar</div>
             <div className="text-muted text-sm">Prévia do feed @clinicarotelli com os 12 posts.</div>
           </div>
-          <span className="text-brand text-2xl">›</span>
+          <ChevronRight size={22} className="text-brand" />
         </Link>
 
         {/* atalhos */}
         <div className="grid sm:grid-cols-3 gap-3 mt-4">
-          <Link
-            href="/atendimento"
-            className="bg-card rounded-2xl border border-line p-5 hover:border-brand hover:shadow-md transition text-center"
-          >
-            <div className="text-3xl">💬</div>
-            <div className="font-bold mt-1.5">Atendimento</div>
-            <div className="text-muted text-xs mt-0.5">WhatsApp + bot</div>
-          </Link>
-          <Link
-            href="/painel"
-            className="bg-card rounded-2xl border border-line p-5 hover:border-brand hover:shadow-md transition text-center"
-          >
-            <div className="text-3xl">📊</div>
-            <div className="font-bold mt-1.5">Painel</div>
-            <div className="text-muted text-xs mt-0.5">visão da recepção</div>
-          </Link>
-          <Link
-            href="/agenda"
-            className="bg-card rounded-2xl border border-line p-5 hover:border-brand hover:shadow-md transition text-center"
-          >
-            <div className="text-3xl">🗓️</div>
-            <div className="font-bold mt-1.5">Agenda</div>
-            <div className="text-muted text-xs mt-0.5">horários por doutor</div>
-          </Link>
+          {ATALHOS.map((a) => (
+            <Link
+              key={a.href}
+              href={a.href}
+              className="bg-card rounded-2xl border border-line p-5 hover:border-brand hover:shadow-md transition text-center flex flex-col items-center"
+            >
+              <a.Icon size={26} className="text-brand" />
+              <div className="font-bold mt-1.5">{a.label}</div>
+              <div className="text-muted text-xs mt-0.5">{a.sub}</div>
+            </Link>
+          ))}
         </div>
 
         <div className="flex items-center justify-center gap-2 mt-8">

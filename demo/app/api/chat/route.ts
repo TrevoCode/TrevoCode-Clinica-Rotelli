@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   // Sem motor configurado → demo mostra aviso no lugar da resposta (não quebra).
   if (!llmConfigurado()) {
     const aviso =
-      "⚠️ Demo sem motor de IA configurado. Defina LLM_PROVIDER / LLM_MODEL / LLM_API_KEY no .env.local (ver .env.local.example).";
+      "Demo sem motor de IA configurado. Defina LLM_PROVIDER / LLM_MODEL / LLM_API_KEY no .env.local (ver .env.local.example).";
     conversa.mensagens.push({ autor: "sistema", texto: aviso, ts: Date.now() });
     return NextResponse.json({ resposta: { acao: "responder", mensagem: aviso }, conversa });
   }
@@ -40,8 +40,8 @@ export async function POST(req: NextRequest) {
     const err = e as { status?: number; message?: string };
     const tecnica =
       err.status === 401
-        ? "⚠️ Chave do provedor inválida (401). Confira LLM_API_KEY no .env.local."
-        : "Tive um problema técnico agora. Vou te conectar com a equipe. 🙏";
+        ? "Chave do provedor inválida (401). Confira LLM_API_KEY no .env.local."
+        : "Tive um problema técnico agora. Vou te conectar com a equipe.";
     conversa.mensagens.push({ autor: "sistema", texto: tecnica, ts: Date.now() });
     return NextResponse.json({ resposta: { acao: "escalar", mensagem: tecnica }, conversa });
   }
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         agendamento: null,
         motivo_escala: "implante/harmonização (especialidades do Dr. Claudio) → atendimento humano",
         mensagem:
-          "Esse procedimento é com o nosso especialista, o Dr. Claudio Rotelli. Vou te passar pra nossa equipe pra cuidar disso com você. 🙏",
+          "Esse procedimento é com o nosso especialista, o Dr. Claudio Rotelli. Vou te passar pra nossa equipe pra cuidar disso com você.",
       };
     } else {
       const bk = reservar({
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
           acao: "responder",
           agendamento: null,
           mensagem:
-            "Esse horário acabou de ser preenchido 😕 Posso te oferecer outro horário disponível?",
+            "Esse horário acabou de ser preenchido. Posso te oferecer outro horário disponível?",
         };
       } else {
         // Grava direto no Google Agenda do Dr. Lucas (geral). Não bloqueia o agendamento se falhar/não configurado.

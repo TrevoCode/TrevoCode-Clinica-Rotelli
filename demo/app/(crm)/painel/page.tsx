@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CalendarCheck, ArrowUpRight, AlertTriangle, MessageCircle, ExternalLink } from "lucide-react";
 
 type Painel = {
   kpis: {
@@ -69,7 +70,7 @@ export default function Painel() {
 
           <div className="grid sm:grid-cols-2 gap-4 mt-5">
             <section className="rounded-2xl border border-line bg-card p-4 shadow-sm">
-              <h2 className="font-bold mb-2">📅 Agendamentos feitos pela IA</h2>
+              <h2 className="font-bold mb-2 flex items-center gap-1.5"><CalendarCheck size={16} className="text-brand" /> Agendamentos feitos pela IA</h2>
               {d.bookings.length === 0 ? (
                 <p className="text-muted text-sm">Nenhum ainda.</p>
               ) : (
@@ -83,9 +84,9 @@ export default function Painel() {
                           href={b.googleEventLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="ml-1 text-[10px] text-emerald-700 bg-emerald-100 rounded px-1 py-0.5 hover:underline"
+                          className="ml-1 inline-flex items-center gap-0.5 text-[10px] text-emerald-700 bg-emerald-100 rounded px-1 py-0.5 hover:underline"
                         >
-                          ↗ Google Agenda
+                          <ExternalLink size={10} /> Google Agenda
                         </a>
                       ) : null}
                     </li>
@@ -95,7 +96,7 @@ export default function Painel() {
             </section>
 
             <section className="rounded-2xl border border-line bg-card p-4 shadow-sm">
-              <h2 className="font-bold mb-2">↗️ Fila da recepção (escalonados)</h2>
+              <h2 className="font-bold mb-2 flex items-center gap-1.5"><ArrowUpRight size={16} className="text-amber-600" /> Fila da recepção (escalonados)</h2>
               {d.escalas.length === 0 ? (
                 <p className="text-muted text-sm">Nenhum ainda.</p>
               ) : (
@@ -105,8 +106,8 @@ export default function Painel() {
                       key={e.id}
                       className={`text-sm border-l-2 pl-2 ${e.urgencia ? "border-red-500" : "border-amber-500"}`}
                     >
-                      <div className="text-ink/80">
-                        {e.urgencia ? "⚠️ URGÊNCIA — " : ""}
+                      <div className="text-ink/80 flex items-center gap-1">
+                        {e.urgencia ? <span className="inline-flex items-center gap-1 font-semibold text-red-600"><AlertTriangle size={13} /> URGÊNCIA —</span> : null}
                         {e.motivo}
                       </div>
                       <div className="text-muted text-xs">“{e.trecho}”</div>
@@ -118,7 +119,7 @@ export default function Painel() {
           </div>
 
           <section className="rounded-2xl border border-line bg-card p-4 shadow-sm mt-4">
-            <h2 className="font-bold mb-2">💬 Conversas</h2>
+            <h2 className="font-bold mb-2 flex items-center gap-1.5"><MessageCircle size={16} className="text-brand" /> Conversas</h2>
             {d.conversas.length === 0 ? (
               <p className="text-muted text-sm">Nenhuma conversa ainda — abra o Atendimento e teste.</p>
             ) : (
