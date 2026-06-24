@@ -235,7 +235,7 @@ export default function Proposta() {
         <div className="grid sm:grid-cols-2 gap-4">
           <IconCard Icon={Target}><b>Anúncio Click-to-WhatsApp</b> — cai direto no bot. Sem formulário, sem lead frio.</IconCard>
           <IconCard Icon={Users}><b>2 frentes</b> — implante/HOF (ticket alto) + geral/avaliação (volume). Geo São Bernardo.</IconCard>
-          <IconCard Icon={Banknote}><b>~R$ 40/dia</b> (~R$ 1.200/mês) — verba paga direto à Meta pela clínica.</IconCard>
+          <IconCard Icon={Banknote}><b>Verba que você controla</b> — começa enxuta e escala conforme dá resultado. Paga direto à Meta pela clínica.</IconCard>
           <IconCard Icon={TrendingUp} className="border-brand/40 bg-brand-soft"><b className="text-brand-dark">~10–30 pacientes/mês</b> na cadeira (cenário conservador, calibra nas 2 primeiras semanas).</IconCard>
         </div>
         <p className="text-muted text-sm mt-6 flex items-start gap-2">
@@ -257,26 +257,27 @@ export default function Proposta() {
         <p className="text-muted text-sm mt-6">Sem promessa mágica. Números reais, calibrados, e você vê o funil todo mês.</p>
       </Slide>
 
-      {/* 10 — Investimento */}
+      {/* 10 — Investimento (estrutura, sem valores — apresentados na conversa) */}
       <Slide className="bg-cream-2">
-        <Eyebrow>Investimento (valores de exemplo)</Eyebrow>
-        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8">Quanto custa</h2>
+        <Eyebrow>Investimento</Eyebrow>
+        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Como funciona o investimento</h2>
+        <p className="text-muted mb-8 max-w-2xl">Modelo simples e transparente, pensado pra caber no fluxo da clínica.</p>
         <div className="space-y-3">
-          <Card className="flex items-center justify-between gap-3">
-            <div><b>Setup</b> <span className="text-muted text-sm">(uma vez) — perfil, bot, WhatsApp oficial, agenda, anúncios, base</span></div>
-            <div className="text-2xl font-extrabold text-brand whitespace-nowrap">R$ 2.997</div>
+          <Card className="flex items-start gap-3">
+            <Num n={1} />
+            <div><b>Setup</b> <span className="text-muted text-sm">(uma vez) — colocar tudo no ar: site, bot, perfil, WhatsApp e automação.</span></div>
           </Card>
-          <Card className="flex items-center justify-between gap-3">
-            <div><b>Mensalidade</b> <span className="text-muted text-sm">(turnkey) — conteúdo, edição, postagem, bot, anúncios, relatório</span></div>
-            <div className="text-2xl font-extrabold text-brand whitespace-nowrap">R$ 1.997<span className="text-base text-muted">/mês</span></div>
+          <Card className="flex items-start gap-3">
+            <Num n={2} />
+            <div><b>Mensalidade</b> <span className="text-muted text-sm">— mantém os posts, o bot 24/7 e tudo rodando, com relatório.</span></div>
           </Card>
-          <Card className="flex items-center justify-between gap-3">
-            <div><b>Verba de mídia</b> <span className="text-muted text-sm">— paga direto à Meta pela clínica</span></div>
-            <div className="text-2xl font-extrabold text-ink/60 whitespace-nowrap">~R$ 1.200<span className="text-base text-muted">/mês</span></div>
+          <Card className="flex items-start gap-3">
+            <Num n={3} />
+            <div><b>Verba de anúncio</b> <span className="text-muted text-sm">(à parte) — você controla; paga direto à Meta, começa enxuta e escala.</span></div>
           </Card>
         </div>
-        <p className="text-muted text-sm mt-5">
-          Ancoragem: <b className="text-ink/80">1 implante fechado/mês já cobre a mensalidade + a mídia.</b> Valores acima são exemplo de demonstração.
+        <p className="text-muted text-sm mt-6">
+          <b className="text-ink/80">Os valores a gente apresenta na conversa</b>, sob medida pro momento da clínica. Ancoragem: <b className="text-ink/80">1 implante fechado já paga meses.</b>
         </p>
       </Slide>
 
