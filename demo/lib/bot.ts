@@ -4,7 +4,7 @@
 // PROVIDER-AGNÓSTICO: funciona com qualquer motor hospedado via OpenAI-compatible
 // (OpenRouter, Groq, OpenAI, Gemini) ou Anthropic direto. Troca por variável de ambiente:
 //   LLM_PROVIDER = openrouter | groq | openai | gemini | ollama | anthropic   (default openrouter)
-//   LLM_MODEL    = slug do modelo (ex.: "anthropic/claude-sonnet-4.5", "google/gemini-2.0-flash-001")
+//   LLM_MODEL    = slug do modelo (ex.: "anthropic/claude-sonnet-4.5", "google/gemini-2.5-flash")
 //   LLM_API_KEY  = chave do provedor (Anthropic usa ANTHROPIC_API_KEY)
 //   LLM_BASE_URL = (opcional) sobrescreve a URL base
 // Spec do prompt/guardrails: ../BOT-PROMPT.md

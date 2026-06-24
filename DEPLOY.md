@@ -12,7 +12,7 @@ O bot lê três variáveis (server-side — **nunca** use prefixo `NEXT_PUBLIC_`
 | Name | Value |
 |------|-------|
 | `LLM_PROVIDER` | `openrouter` |
-| `LLM_MODEL` | `google/gemini-2.0-flash-001` |
+| `LLM_MODEL` | `google/gemini-2.5-flash` |
 | `LLM_API_KEY` | `sk-or-...` (gere em https://openrouter.ai) |
 
 Sem a chave o app funciona, mas o chat mostra um aviso em vez de responder. Todas as outras telas
