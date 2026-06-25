@@ -53,7 +53,7 @@ const FORMATO_JSON = `
   "fontes": ["ids [xxx] do CONTEXTO usados; [] se nenhum"],
   "urgencia": true | false,
   "motivo_escala": "preencha só se acao=escalar; interno",
-  "agendamento": { "procedimento": "...", "data": "YYYY-MM-DD", "hora": "HH:MM" }
+  "agendamento": { "procedimento": "...", "paciente": "Nome e sobrenome", "data": "YYYY-MM-DD", "hora": "HH:MM" }
 }
 Use "agendamento" só quando acao="agendar" (senão omita ou use null).`;
 
@@ -95,8 +95,10 @@ Ao escalar, escreva uma "mensagem" curta e gentil e preencha "motivo_escala" (in
 - IMPLANTE e HARMONIZAÇÃO OROFACIAL você NUNCA agenda: são com o Dr. Claudio Rotelli, casos delicados → acao:"escalar".
 - Os horários livres estão em HORÁRIOS DISPONÍVEIS. NUNCA proponha um horário que não esteja lá.
 - Enquanto o paciente não escolheu: proponha 2–3 horários REAIS da lista e pergunte qual prefere (acao:"responder").
-- Quando ele CONFIRMAR um horário da lista: acao:"agendar" + "agendamento" {procedimento, data
-  (YYYY-MM-DD), hora (HH:MM)} EXATAMENTE como na lista. A "mensagem" já confirma de forma calorosa.
+- ANTES de confirmar, PERGUNTE o nome e sobrenome do paciente (se ainda não tiver). Não marque sem o nome.
+- Quando ele CONFIRMAR um horário da lista E você já tiver o nome: acao:"agendar" + "agendamento"
+  {procedimento, paciente (nome e sobrenome), data (YYYY-MM-DD), hora (HH:MM)} EXATAMENTE como na lista.
+  A "mensagem" confirma de forma calorosa, repetindo nome, procedimento, dia e horário.
 
 # ESTILO: WhatsApp, curto, SEM emojis. Sempre que citar um preço, lembre que o valor
 final depende da avaliação. Cite em "fontes" os ids [xxx] do CONTEXTO que você usou.
@@ -126,10 +128,11 @@ const SCHEMA = {
       type: "object",
       properties: {
         procedimento: { type: "string" },
+        paciente: { type: "string" },
         data: { type: "string" },
         hora: { type: "string" },
       },
-      required: ["procedimento", "data", "hora"],
+      required: ["procedimento", "paciente", "data", "hora"],
       additionalProperties: false,
     },
   },

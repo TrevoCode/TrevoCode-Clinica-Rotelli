@@ -98,7 +98,9 @@ export async function criarEventoGoogle(
   const fim = `${String(h + 1).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   const body = {
     summary: `${ev.procedimento}${ev.paciente ? " — " + ev.paciente : ""}`,
-    description: `Agendado pela Sofia (assistente virtual da Clínica Rotelli).\nProcedimento: ${ev.procedimento}.`,
+    description:
+      `Agendado pela Sofia (assistente virtual da Clínica Rotelli).\n\n` +
+      `Paciente: ${ev.paciente ?? "—"}\nProcedimento: ${ev.procedimento}\nHorário: ${ev.data} às ${ev.hora}`,
     start: { dateTime: `${ev.data}T${ev.hora}:00`, timeZone: FUSO },
     end: { dateTime: `${ev.data}T${fim}:00`, timeZone: FUSO },
   };
@@ -137,5 +139,125 @@ export async function testarGoogle(doutorId: string): Promise<{ ok: boolean; err
     return { ok: false, erro: `Google respondeu ${r.status}.` };
   } catch {
     return { ok: false, erro: "Erro de rede ao falar com o Google." };
+  }
+}
+
+// Lê os intervalos OCUPADOS (free/busy) da agenda do doutor entre isoMin e isoMax.
+// Retorna [{start,end}] em epoch ms, ou null se não configurado / erro (= "não sincronizado").
+export async function ocupadosGoogle(
+  doutorId: string,
+  isoMin: string,
+  isoMax: string,
+): Promise<{ start: number; end: number }[] | null> {
+  const calId = calendarId(doutorId);
+  const token = await accessToken();
+  if (!calId || !token) return null;
+  try {
+    const r = await fetch("https://www.googleapis.com/calendar/v3/freeBusy", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ timeMin: isoMin, timeMax: isoMax, timeZone: FUSO, items: [{ id: calId }] }),
+    });
+    if (!r.ok) return null;
+    const j = (await r.json()) as {
+      calendars?: Record<string, { busy?: { start: string; end: string }[]; errors?: unknown }>;
+    };
+    const cal = j.calendars?.[calId];
+    if (!cal || cal.errors) return null;
+    return (cal.busy ?? []).map((b) => ({ start: Date.parse(b.start), end: Date.parse(b.end) }));
+  } catch {
+    return null;
+  }
+}
+
+// Lê os EVENTOS (com título) da agenda do doutor entre isoMin e isoMax — pra mostrar o que está
+// agendado (paciente + procedimento + hora) no site. Retorna null se não configurado / erro.
+export async function eventosGoogle(
+  doutorId: string,
+  isoMin: string,
+  isoMax: string,
+): Promise<{ id: string; start: number; end: number; data: string; hora: string; fim: string; titulo: string }[] | null> {
+  const calId = calendarId(doutorId);
+  const token = await accessToken();
+  if (!calId || !token) return null;
+  try {
+    const u = new URL(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calId)}/events`);
+    u.searchParams.set("timeMin", isoMin);
+    u.searchParams.set("timeMax", isoMax);
+    u.searchParams.set("singleEvents", "true");
+    u.searchParams.set("orderBy", "startTime");
+    u.searchParams.set("maxResults", "250");
+    const r = await fetch(u, { headers: { Authorization: `Bearer ${token}` } });
+    if (!r.ok) return null;
+    const j = (await r.json()) as {
+      items?: {
+        id?: string;
+        summary?: string;
+        transparency?: string;
+        start?: { dateTime?: string; date?: string };
+        end?: { dateTime?: string; date?: string };
+      }[];
+    };
+    const fData = new Intl.DateTimeFormat("en-CA", { timeZone: FUSO, year: "numeric", month: "2-digit", day: "2-digit" });
+    const fHora = new Intl.DateTimeFormat("pt-BR", { timeZone: FUSO, hour: "2-digit", minute: "2-digit", hour12: false });
+    const out: { id: string; start: number; end: number; data: string; hora: string; fim: string; titulo: string }[] = [];
+    for (const e of j.items ?? []) {
+      if (e.transparency === "transparent") continue; // evento marcado como "disponível"
+      const s = e.start?.dateTime ?? (e.start?.date ? `${e.start.date}T00:00:00-03:00` : null);
+      const en = e.end?.dateTime ?? (e.end?.date ? `${e.end.date}T00:00:00-03:00` : null);
+      if (!s || !en) continue;
+      const start = Date.parse(s);
+      const end = Date.parse(en);
+      out.push({ id: e.id ?? "", start, end, data: fData.format(start), hora: fHora.format(start), fim: fHora.format(end), titulo: e.summary || "(ocupado)" });
+    }
+    return out;
+  } catch {
+    return null;
+  }
+}
+
+// Cria um evento avulso (agendamento ou bloqueio) na agenda do doutor. Retorna o id ou null.
+export async function criarEvento(
+  doutorId: string,
+  ev: { summary: string; descricao?: string; data: string; hora: string; fim: string },
+): Promise<string | null> {
+  const calId = calendarId(doutorId);
+  const token = await accessToken();
+  if (!calId || !token) return null;
+  try {
+    const r = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calId)}/events`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          summary: ev.summary,
+          description: ev.descricao ?? "",
+          start: { dateTime: `${ev.data}T${ev.hora}:00`, timeZone: FUSO },
+          end: { dateTime: `${ev.data}T${ev.fim}:00`, timeZone: FUSO },
+        }),
+      },
+    );
+    if (!r.ok) return null;
+    const j = (await r.json()) as { id?: string };
+    return j.id ?? null;
+  } catch {
+    return null;
+  }
+}
+
+// Remove um evento da agenda do doutor. true se removeu (ou já não existia).
+export async function deletarEvento(doutorId: string, id: string): Promise<boolean> {
+  const calId = calendarId(doutorId);
+  const token = await accessToken();
+  if (!calId || !token) return false;
+  try {
+    const r = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calId)}/events/${encodeURIComponent(id)}`,
+      { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
+    );
+    return r.ok || r.status === 410;
+  } catch {
+    return false;
   }
 }

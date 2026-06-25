@@ -10,17 +10,33 @@ export const DOUTORES: Doutor[] = [
   { id: "socio", nome: "Dr. Claudio Rotelli", especialidade: "Implante e Harmonização Orofacial" },
 ];
 
-export const HORAS_CANDIDATAS = ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"];
+// Horário de atendimento: 07:00 às 18:00, de 30 em 30 min.
+// (Almoço/pausas são bloqueados criando eventos na agenda Google — o site acompanha.)
+export const HORAS_CANDIDATAS = [
+  "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
+  "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00",
+];
 const DIAS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 function pad(n: number): string {
   return n < 10 ? `0${n}` : `${n}`;
 }
 
+// Data de hoje (YYYY-MM-DD) no fuso da clínica.
+export function hojeISO(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
+
 export function proximosDias(qtd = 7): { data: string; rotulo: string }[] {
   const out: { data: string; rotulo: string }[] = [];
   const hoje = new Date();
-  let off = 1;
+  let off = 0;
   while (out.length < qtd && off < 21) {
     const d = new Date(hoje);
     d.setDate(hoje.getDate() + off);
@@ -48,11 +64,12 @@ interface Store {
 // Disponibilidade inicial de demo (a clínica ajusta na tela /agenda).
 function gerarAgenda(): SlotAgenda[] {
   const slots: SlotAgenda[] = [];
+  // Fallback de demo (só usado quando a agenda Google não está conectada).
   const pre: Record<string, string[]> = {
-    lucas: ["09:00", "10:00", "14:00", "15:00", "16:00"],
-    socio: ["10:00", "11:00", "15:00"],
+    lucas: HORAS_CANDIDATAS,
+    socio: HORAS_CANDIDATAS.filter((_, i) => i % 2 === 0),
   };
-  for (const { data } of proximosDias(5)) {
+  for (const { data } of proximosDias(7)) {
     for (const doutor of Object.keys(pre)) {
       for (const hora of pre[doutor]) slots.push({ doutor, data, hora, status: "livre" });
     }

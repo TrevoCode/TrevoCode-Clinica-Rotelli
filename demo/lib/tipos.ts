@@ -13,6 +13,7 @@ export type Acao = "responder" | "escalar" | "agendar";
 
 export interface Agendamento {
   procedimento: string;
+  paciente: string; // nome e sobrenome do paciente (o bot pergunta antes de confirmar)
   data: string; // "YYYY-MM-DD" — deve bater com um slot livre da agenda
   hora: string; // "HH:MM"
 }
@@ -51,6 +52,7 @@ export interface Conversa {
 export interface Booking {
   id: string;
   procedimento: string;
+  paciente?: string; // nome e sobrenome do paciente
   doutor: string;
   data: string;
   hora: string;

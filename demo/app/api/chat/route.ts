@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
     } else {
       const bk = reservar({
         procedimento: resposta.agendamento.procedimento,
+        paciente: resposta.agendamento.paciente,
         data: resposta.agendamento.data,
         hora: resposta.agendamento.hora,
         conversaId,
@@ -78,6 +79,7 @@ export async function POST(req: NextRequest) {
         try {
           const link = await criarEventoGoogle("lucas", {
             procedimento: bk.procedimento,
+            paciente: bk.paciente ?? undefined,
             data: bk.data,
             hora: bk.hora,
           });
